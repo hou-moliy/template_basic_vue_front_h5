@@ -3,15 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "vue-cli-service serve --mode dev",
+    "serve:dev": "vue-cli-service serve  --mode dev",
+    "serve:devK": "vue-cli-service serve  --mode devK",
+    "serve:pre": "vue-cli-service serve  --mode pre",
+    "serve:prod": "vue-cli-service serve  --mode prod",
+    "build": "vue-cli-service build --mode dev",
+    "build:dev": "vue-cli-service build  --mode dev",
+    "build:devK": "vue-cli-service build  --mode devK",
+    "build:pre": "vue-cli-service build --mode pre",
+    "build:prod": "vue-cli-service build --mode prod",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^3.8.3",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",
-    "vuex": "^3.6.2"
+    "vuex": "^3.6.2",
+    "jquery": "^3.6.0",
+    "jsencrypt": "^3.2.1",
+    "lib-flexible": "^0.3.2",
+    "vant": "^2.12.46",
+    "vconsole": "^3.14.5",
+    "axios": "^0.26.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -23,8 +37,12 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "babel-plugin-import": "^1.13.3",
+    "plop": "^3.0.5",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "vconsole-webpack-plugin": "^1.7.3",
     "vue-template-compiler": "^2.6.14"
   }
 }

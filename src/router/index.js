@@ -1,29 +1,37 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from 'vue';
+import Router from 'vue-router';
+import PageNotFound from '@/views/pageNotFound.vue';
+import IndexView from "@/views/index/index.vue";
 
-Vue.use(VueRouter)
-
-const routes = [
+Vue.use(Router);
+const constantRoutes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: '*',
+    component: PageNotFound
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/',
+    component: IndexView
   }
-]
+];
 
-const router = new VueRouter({
+let routes = [...constantRoutes];
+const routerContext = require.context('./', true, /index\.js$/);
+routerContext.keys().forEach((route) => {
+  // 如果是根目录的 index.js 不处理
+  if (route.startsWith('./index')) {
+    return;
+  }
+  const routerModule = routerContext(route);
+  //  兼容 import export 和 require module.require 两种规范
+  routes = [...routes, ...(routerModule.default || routerModule)];
+});
+console.log(routes, 'xxxx');
+
+const router = new Router({
   mode: 'history',
-  base: process.env.BASE_URL,
+  base: process.env.VUE_APP_BASE_URL,
   routes
-})
+});
 
-export default router
+export default router;
