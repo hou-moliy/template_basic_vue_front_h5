@@ -59,7 +59,7 @@ module.exports = {
       "afterColon": true
     }],
     "block-scoped-var": 2, // 块语句中使用var
-    "consistent-return": 2, // return 后面是否允许省略
+    "consistent-return": 0, // return 后面是否允许省略
     "accessor-pairs": 2, // 在对象中使用getter/setter
     "dot-location": [2, "property"], // 对象访问符的位置，换行的时候在行首还是行尾
     "no-lone-blocks": 2, // 禁止不必要的嵌套块
@@ -98,7 +98,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['src/views/**/*.vue'],
+      files: ['src/views/index.vue', 'src/views/**/index.vue'],
       rules: {
         'vue/multi-word-component-names': 0
       }

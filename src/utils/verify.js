@@ -20,3 +20,8 @@ export const verifyCode = (val) => {
   }
   return false;
 };
+// 姓名校验
+export const verifyName = (val) => {
+  let reg = /^[\u4E00-\u9FA5]{2,10}(·[\u4E00-\u9FA5]{2,10}){0,2}$/;
+  return reg.test(val);
+};
