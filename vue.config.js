@@ -97,11 +97,6 @@ module.exports = defineConfig({
         }
       }
     };
-    // 分离不需要改动的库
-    config.externals = {
-      'vue': 'Vue',
-      'vue-router': 'VueRouter'
-    };
     config.plugins = [...config.plugins, ...pluginsDev];
   }
 });
