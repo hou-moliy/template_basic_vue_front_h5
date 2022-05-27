@@ -6,12 +6,13 @@ import IndexView from "@/views/index/index.vue";
 Vue.use(Router);
 const constantRoutes = [
   {
-    path: '*',
-    component: PageNotFound
-  },
-  {
     path: '/',
     component: IndexView
+  },
+  {
+    path: '*',
+    component: PageNotFound,
+    meta: { requiresAuth: false } // 表示不需要校验登录，默认都是需要校验登录
   }
 ];
 
@@ -26,8 +27,6 @@ routerContext.keys().forEach((route) => {
   //  兼容 import export 和 require module.require 两种规范
   routes = [...routes, ...(routerModule.default || routerModule)];
 });
-console.log(routes, 'xxxx');
-
 const router = new Router({
   mode: 'history',
   base: process.env.VUE_APP_BASE_URL,

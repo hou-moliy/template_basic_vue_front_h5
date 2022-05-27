@@ -1,10 +1,14 @@
-// 全局路由守卫
+// 全局路由守卫----登录权限控制
 import Vue from "vue";
 import router from '@/router/index';
 import SsoApi from "@/api/sso";
 
 router.beforeEach((to, from, next) => {
+  // 清除之前的请求
   clearHttpRequestingList();
+  // 不需要的页面直接去该页面
+  if (to.matched.some(record => record.meta.requiresAuth === false)) { return next(); }
+  // 需要登录的页面去校验是否登录
   let token = localStorage.getItem('Authorization');
   const { auth } = to.query;
   if (auth) { // 免登录
