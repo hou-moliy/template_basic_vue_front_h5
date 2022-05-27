@@ -5,16 +5,17 @@
 </template>
 
 <script>
-import { checkAuditTime, parseTime } from "@/utils/time.js";
 
 export default {
   name: 'IndexView',
   components: {
   },
   create () {
-    let stime = new Date(); //开始日期
-    stime = parseTime(stime, '{y}-{m}-{d}');
-    checkAuditTime(stime);
   }
 };
 </script>
+<style lang="scss" scoped>
+.index_wrap {
+  font-size: 25px;
+}
+</style>

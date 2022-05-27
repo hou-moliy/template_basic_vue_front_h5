@@ -7,6 +7,7 @@ import store from './store';
 import "./plugins/vant";
 import "./permission";
 import Directives from './directives/index';
+import 'normalize.css/normalize.css';
 Vue.use(Directives);
 //  cancelToken中的cancel函数
 Vue.$httpRequestList = [];
