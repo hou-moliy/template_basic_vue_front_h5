@@ -1,3 +1,4 @@
+// 防抖指令，可用于表单提交防止重复点击
 const debounce = {
   inserted: function (el, binding) {
     let timer;
@@ -7,7 +8,7 @@ const debounce = {
       }
       timer = setTimeout(() => {
         binding.value();
-      }, binding.value || 3000);
+      }, binding.arg || 1000);
     });
   }
 };

@@ -55,16 +55,6 @@ export const getpreDate = (month, type = 1) => { // type = 1是前几个月，0�
   return dt;
 };
 
-//关闭所有历史页面,跳转到某个页面
-export const colseAllPage = (url) => {
-  let backlen = window.history.length - 1;
-  window.history.go(-backlen);
-  console.log(url, 'url');
-  setTimeout(() => {
-    url && router.push(url);
-  }, 100);
-};
-
 // 手机号脱敏展示
 export const desensitizationPhone = (phone) => {
   // 第一种

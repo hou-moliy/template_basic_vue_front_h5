@@ -42,6 +42,8 @@ module.exports = defineConfig({
     ]
   },
   configureWebpack: config => {
+    // 可以省略后缀
+    config.resolve.extensions = ['.js', '.vue', '.json'];
     //生产环境去掉vconsole调试器
     let envType = process.env.NODE_ENV != 'prod';
     let pluginsDev = [

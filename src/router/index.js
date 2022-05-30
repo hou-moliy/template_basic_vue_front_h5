@@ -17,12 +17,9 @@ const constantRoutes = [
 ];
 
 let routes = [...constantRoutes];
-const routerContext = require.context('./', true, /index\.js$/);
+const routerContext = require.context('.', false, /\.js$/);
 routerContext.keys().forEach((route) => {
-  // 如果是根目录的 index.js 不处理
-  if (route.startsWith('./index')) {
-    return;
-  }
+  if (route === './index.js') { return; };
   const routerModule = routerContext(route);
   //  兼容 import export 和 require module.require 两种规范
   routes = [...routes, ...(routerModule.default || routerModule)];
