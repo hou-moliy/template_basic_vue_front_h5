@@ -1,7 +1,8 @@
 {
   "name": "template_basic_vue_front_h5",
   "version": "0.1.0",
-  "private": true,
+  "description": "vue h5 template",
+  "author": "houyuanzhen",
   "scripts": {
     "serve": "vue-cli-service serve --mode dev",
     "serve:dev": "vue-cli-service serve  --mode dev",
