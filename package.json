@@ -1,8 +1,8 @@
 {
-  "name": "{{template_basic_vue_front_h5}}",
+  "name": "{{name}}",
   "version": "0.1.0",
-  "description": "{{vue h5 template}}",
-  "author": "{{houyuanzhen}}",
+  "description": "{{ description }}",
+  "author": "{{ author }}",
   "scripts": {
     "serve": "vue-cli-service serve --mode dev",
     "serve:dev": "vue-cli-service serve  --mode dev",
