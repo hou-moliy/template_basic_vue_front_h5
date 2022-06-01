@@ -19,6 +19,7 @@
     "axios": "^0.26.1",
     "compression-webpack-plugin": "^9.2.0",
     "core-js": "^3.8.3",
+    "fingerprintjs2": "^2.1.4",
     "jquery": "^3.6.0",
     "jsencrypt": "^3.2.1",
     "lib-flexible": "^0.3.2",
