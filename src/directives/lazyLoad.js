@@ -1,16 +1,16 @@
-const LazyLoad = {
+const lazyLoad = {
   // install方法
   install (Vue, options) {
     const defaultSrc = options.default;
     Vue.directive('lazy', {
       bind (el, binding) {
-        LazyLoad.init(el, binding.value, defaultSrc);
+        lazyLoad.init(el, binding.value, defaultSrc);
       },
       inserted (el) {
         if (IntersectionObserver) {
-          LazyLoad.observe(el);
+          lazyLoad.observe(el);
         } else {
-          LazyLoad.listenerScroll(el);
+          lazyLoad.listenerScroll(el);
         }
       }
     });
@@ -35,8 +35,8 @@ const LazyLoad = {
   },
   // 监听scroll事件
   listenerScroll (el) {
-    const handler = LazyLoad.throttle(LazyLoad.load, 300);
-    LazyLoad.load(el);
+    const handler = lazyLoad.throttle(lazyLoad.load, 300);
+    lazyLoad.load(el);
     window.addEventListener('scroll', () => {
       handler(el);
     });
@@ -80,4 +80,4 @@ const LazyLoad = {
   }
 };
 
-export default LazyLoad;
+export default lazyLoad;

@@ -1,3 +1,4 @@
+// 长按指令
 const longpress = {
   bind: function (el, binding, vNode) {
     console.log(vNode);
@@ -18,7 +19,7 @@ const longpress = {
       if (pressTimer === null) {
         pressTimer = setTimeout(() => {
           handler();
-        }, 2000);
+        }, binding.arg || 2000);
       }
     };
     // 取消计时器

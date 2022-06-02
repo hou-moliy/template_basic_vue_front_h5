@@ -1,3 +1,4 @@
+// 限制不能输入表情指令
 let findEle = (parent, type) => {
   return parent.tagName.toLowerCase() === type ? parent : parent.querySelector(type);
 };
