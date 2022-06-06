@@ -2,7 +2,7 @@
   <div class="index_wrap">
     <p>登录页面</p>
     <button class="btn"
-            v-login="hanldeLogin">需要判断登录</button>
+            @click="goHome">去首页</button>
     <button class="btn"
             v-debounce="handleLogin">防抖</button>
     <p v-copy="btnText">{{btnText}}</p>
@@ -14,9 +14,6 @@
            v-model="note"
            placeholder="不能输入表情"
            v-emoji />
-    <img class="img"
-         v-lazyLoad="`https://223.70.157.133/resource/ftMsgH5/index_bg.png`" />
-
   </div>
 </template>
 
@@ -44,8 +41,9 @@ export default {
     handleLongPress () {
       this.$toast("长按展示");
     },
-    hanldeLogin () {
-      console.log('登录成功');
+    goHome () {
+      localStorage.setItem('Authorization', 'yyy');
+      this.$router.push('/');
     }
   }
 };

@@ -1,24 +1,3 @@
-# template_basic_vue_front_h5
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Vue基础的h5模板
+项目介绍和使用方式参考以下文档：
+https://app.yinxiang.com/fx/fe592df7-fb96-4380-9682-cf107cdae586

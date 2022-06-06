@@ -1,16 +1,27 @@
-const handleLogin = (callBack) => {
+import Vue from "vue";
+import router from "@/router";
+// 判断用户是否登录，没有登录就展示弹窗跳转登录页面
+const handleLogin = () => {
+  debugger;
   if (!localStorage.getItem('Authorization')) {
     // 修改登录状态
     // 设置登录状态
     console.log('你还没有登录，展示登录弹窗');
-  } else {
-    callBack();
+    Vue.prototype.$dialog.alert({
+      message: '你还没有登录，快去登录吧',
+      theme: 'round-button',
+      confirmButtonText: '去登录',
+      confirmButtonColor: '#4DC591'
+    }).then(() => {
+      // on close
+      router.push('/login');
+    });
   }
 };
 
 const login = {
-  inserted: function (el, binding) {
-    el.addEventListener('click', handleLogin(binding.value), true);
+  inserted: function (el) {
+    el.addEventListener('click', handleLogin, true);
   }
 };
 export default login;
