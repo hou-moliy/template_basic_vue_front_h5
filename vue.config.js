@@ -52,53 +52,56 @@ module.exports = defineConfig({
         enable: envType
       })
     ];
-    config.optimization = {
-      nodeEnv: false
-    };
 
-    // 输出重构  打包编译后的 文件名称  【模块名称.时间戳.js】 解决js缓存问题
-    config.output.filename = `${filePath}[name]${Timestamp}.js`;
-    config.output.chunkFilename = `${filePath}[name]${Timestamp}.js`;
-    config.plugins.push(
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-            drop_debugger: true,//生产环境自动删除debugger
-            drop_console: true, //生产环境自动删除console
-            pure_funcs: ['console.log']
+    if (!envType) {
+      // 输出重构  打包编译后的 文件名称  【模块名称.时间戳.js】 解决js缓存问题
+      config.output.filename = `${filePath}[name]${Timestamp}.js`;
+      config.output.chunkFilename = `${filePath}[name]${Timestamp}.js`;
+      config.plugins.push(
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            compress: {
+              drop_debugger: true,//生产环境自动删除debugger
+              drop_console: true, //生产环境自动删除console
+              pure_funcs: ['console.log']
+            },
+            warnings: false
           },
-          warnings: false
-        },
-        sourceMap: false, //关掉sourcemap 会生成对于调试的完整的.map文件，但同时也会减慢打包速度
-        parallel: true //使用多进程并行运行来提高构建速度。默认并发运行数：os.cpus().length - 1。
-      }),
-      new CompressionWebpackPlugin({
-        algorithm: 'gzip',
-        test: /\.js$|\.html$|\.json$|\.css/,
-        threshold: 10240,// 对超过10k的数据压缩
-        deleteOriginalAssets: false, // 不删除源文件
-        minRatio: 0.8
-      })
-    );
-    // 开启分离js
-    config.optimization = {
-      nodeEnv: false,// 解决webpack5不能自定义环境名称问题
-      runtimeChunk: 'single',
-      splitChunks: {
-        chunks: 'all',
-        maxInitialRequests: Infinity,
-        minSize: 2000,
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name (module) {
-              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-              return `npm.${packageName.replace('@', '')}`;
+          sourceMap: false, //关掉sourcemap 会生成对于调试的完整的.map文件，但同时也会减慢打包速度
+          parallel: true //使用多进程并行运行来提高构建速度。默认并发运行数：os.cpus().length - 1。
+        }),
+        new CompressionWebpackPlugin({
+          algorithm: 'gzip',
+          test: /\.js$|\.html$|\.json$|\.css/,
+          threshold: 10240,// 对超过10k的数据压缩
+          deleteOriginalAssets: false, // 不删除源文件
+          minRatio: 0.8
+        })
+      );
+      // 开启分离js
+      config.optimization = {
+        nodeEnv: false,// 解决webpack5不能自定义环境名称问题
+        runtimeChunk: 'single',
+        splitChunks: {
+          chunks: 'all',
+          maxInitialRequests: Infinity,
+          minSize: 2000,
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name (module) {
+                const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+                return `npm.${packageName.replace('@', '')}`;
+              }
             }
           }
         }
-      }
-    };
-    config.plugins = [...config.plugins, ...pluginsDev];
+      };
+      config.plugins = [...config.plugins, ...pluginsDev];
+    } else {
+      config.optimization = {
+        nodeEnv: false
+      };
+    }
   }
 });
