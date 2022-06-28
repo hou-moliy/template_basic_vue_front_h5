@@ -6,7 +6,7 @@
             @click="hanldeLogin">需要判断登录</button>
     <p></p>
     <button class="btn"
-            @click="removeToken">清除登录信息</button>
+            @click="removeToken">退出登录</button>
   </div>
 </template>
 
@@ -23,7 +23,9 @@ export default {
       console.log('登录成功');
     },
     removeToken () {
-      localStorage.removeItem('Authorization');
+      this.$store.dispatch('logOut').then(() => {
+        this.$router.push('/login');
+      });
     }
   }
 };

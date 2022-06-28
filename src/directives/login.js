@@ -2,7 +2,6 @@ import Vue from "vue";
 import router from "@/router";
 // 判断用户是否登录，没有登录就展示弹窗跳转登录页面
 const handleLogin = () => {
-  debugger;
   if (!localStorage.getItem('Authorization')) {
     // 修改登录状态
     // 设置登录状态
