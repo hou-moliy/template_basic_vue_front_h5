@@ -1,7 +1,6 @@
 const { defineConfig } = require('@vue/cli-service');
 const path = require('path');
 // 代码压缩
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const vConsolePlugin = require('vconsole-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 // 解决H5缓存问题
@@ -52,24 +51,15 @@ module.exports = defineConfig({
         enable: envType
       })
     ];
-
-    if (!envType) {
+    config.optimization = {
+      nodeEnv: false
+    };
+    // 正式环境
+    if (process.env.NODE_ENV === 'prod') {
       // 输出重构  打包编译后的 文件名称  【模块名称.时间戳.js】 解决js缓存问题
       config.output.filename = `${filePath}[name]${Timestamp}.js`;
       config.output.chunkFilename = `${filePath}[name]${Timestamp}.js`;
       config.plugins.push(
-        new UglifyJsPlugin({
-          uglifyOptions: {
-            compress: {
-              drop_debugger: true,//生产环境自动删除debugger
-              drop_console: true, //生产环境自动删除console
-              pure_funcs: ['console.log']
-            },
-            warnings: false
-          },
-          sourceMap: false, //关掉sourcemap 会生成对于调试的完整的.map文件，但同时也会减慢打包速度
-          parallel: true //使用多进程并行运行来提高构建速度。默认并发运行数：os.cpus().length - 1。
-        }),
         new CompressionWebpackPlugin({
           algorithm: 'gzip',
           test: /\.js$|\.html$|\.json$|\.css/,
@@ -97,11 +87,7 @@ module.exports = defineConfig({
           }
         }
       };
-      config.plugins = [...config.plugins, ...pluginsDev];
-    } else {
-      config.optimization = {
-        nodeEnv: false
-      };
     }
+    config.plugins = [...config.plugins, ...pluginsDev];
   }
 });

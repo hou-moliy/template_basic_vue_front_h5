@@ -33,6 +33,7 @@ export default {
   },
   mounted () {
     this.$toast("登录页");
+    console.log('登录页面');
   },
   methods: {
     handleLogin () {
