@@ -1,7 +1,8 @@
 // 全局路由守卫----登录权限控制
 import Vue from "vue";
 import router from '@/router/index';
-import SsoApi from "@/api/sso";
+import ssoApi from "@/api/sso";
+import store from "@/store";
 
 router.beforeEach((to, from, next) => {
   // 清除之前的请求
@@ -25,7 +26,7 @@ router.beforeEach((to, from, next) => {
 
 // 处理免登 
 function handleSignIn (auth) {
-  SsoApi.signIn(auth).then(res => {
+  ssoApi.signIn(auth).then(res => {
     if (res.code === 200) {
       let Authorization = `${res.data.tokenHead} ${res.data.token}`;
       localStorage.setItem('Authorization', Authorization);
@@ -33,10 +34,11 @@ function handleSignIn (auth) {
       router.push('/index');
     } else {
       // 免登失败
-      localStorage.removeItem('Authorization');
-      localStorage.removeItem('adminPhone');
-      Vue.prototype.$toast(res.message);
-      router.replace('/login');
+      store.dispatch('logOut').then(() => {
+        // 跳转登录页
+        Vue.prototype.$toast(res.message);
+        router.replace('/login');
+      });
     }
   });
 }

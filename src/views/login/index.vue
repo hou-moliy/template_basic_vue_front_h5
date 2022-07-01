@@ -2,6 +2,9 @@
   <div class="index_wrap">
     <p>登录页面</p>
     <button class="btn"
+            v-login
+            @click="hanldeLogin">判断是否登录</button>
+    <button class="btn"
             @click="goHome">去首页</button>
     <button class="btn"
             v-debounce="handleLogin">防抖</button>
