@@ -1,23 +1,23 @@
-import axios from 'axios';
-import { Notify } from 'vant';
-import Vue from 'vue';
-import router from '../router';
+import axios from "axios";
+import { Notify } from "vant";
+import Vue from "vue";
+import router from "../router";
 const { CancelToken } = axios;
 const TimeOut = 600000;
 const service = axios.create({
   // 设置超时时间
-  timeout: TimeOut
+  timeout: TimeOut,
 });
 
-service.defaults.baseURL = '';
-service.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+service.defaults.baseURL = "";
+service.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 /**
  * 请求前拦截
  * 用于处理需要在请求前的操作
  */
 const loading = null;
 service.interceptors.request.use((config) => {
-  let token = localStorage.getItem('Authorization');
+  const token = localStorage.getItem("Authorization");
   const configVal = config;
   // 强行中断请求要用到的，记录请求信息
   configVal.cancelToken = new CancelToken((cancel) => {
@@ -47,10 +47,10 @@ service.interceptors.response.use((response) => {
   }
   // 断网 或者 请求超时 状态
   if (!error.response) {
-    if (error.message === 'interrupt') {
-      console.log('请求中断');
-    } else if (error.message.includes('timeout')) { // 请求超时状态
-      Notify({ type: 'danger', message: '请求超时，请检查网络是否连接正常' });
+    if (error.message === "interrupt") {
+      console.log("请求中断");
+    } else if (error.message.includes("timeout")) { // 请求超时状态
+      Notify({ type: "danger", message: "请求超时，请检查网络是否连接正常" });
     } else {
       // 可以展示断网组件
       // Notify({ type: 'danger', message: '请求失败，请检查网络是否已连接' });
@@ -64,22 +64,22 @@ service.interceptors.response.use((response) => {
   switch (responseCode) {
     // 401：未登录,登录失效
     case 401:
-      Notify({ type: 'warning', message: '登录信息过期，请重新登录' });
-      localStorage.removeItem('Authorization');
+      Notify({ type: "warning", message: "登录信息过期，请重新登录" });
+      localStorage.removeItem("Authorization");
       // 跳转登录页
       router.replace({
-        path: '/login'
+        path: "/login",
       });
       break;
     case 403:
       break;
     // 404请求不存在
     case 404:
-      Notify({ type: 'danger', message: '网络请求不存在' });
+      Notify({ type: "danger", message: "网络请求不存在" });
       break;
     // 其他错误，直接抛出错误提示
     default:
-      Notify({ type: 'danger', message: '网络出了状况~请稍后再试哦！' });
+      Notify({ type: "danger", message: "网络出了状况~请稍后再试哦！" });
   }
   return Promise.reject(error);
 });

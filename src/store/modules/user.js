@@ -1,6 +1,6 @@
 
 const state = {
-  name: 'xxx'
+  name: "xxx",
 };
 
 const mutations = {
@@ -18,5 +18,5 @@ export default {
   state,
   actions,
   mutations,
-  getters
+  getters,
 };

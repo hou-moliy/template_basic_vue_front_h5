@@ -2,7 +2,7 @@
 const debounce = {
   inserted: function (el, binding) {
     let timer;
-    el.addEventListener('click', () => {
+    el.addEventListener("click", () => {
       if (timer) {
         clearTimeout(timer);
       }
@@ -10,6 +10,6 @@ const debounce = {
         binding.value();
       }, binding.arg || 1000);
     });
-  }
+  },
 };
 export default debounce;

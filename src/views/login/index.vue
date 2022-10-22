@@ -22,13 +22,13 @@
 
 <script>
 export default {
-  name: 'IndexView',
+  name: "IndexView",
   components: {
   },
   data () {
     return {
-      btnText: '点击按钮复制这句话',
-      note: ''
+      btnText: "点击按钮复制这句话",
+      note: "",
     };
   },
   create () {
@@ -36,20 +36,20 @@ export default {
   },
   mounted () {
     this.$toast("登录页");
-    console.log('登录页面');
+    console.log("登录页面");
   },
   methods: {
     handleLogin () {
-      console.log('登录');
+      console.log("登录");
     },
     handleLongPress () {
       this.$toast("长按展示");
     },
     goHome () {
-      localStorage.setItem('Authorization', 'yyy');
-      this.$router.push('/');
-    }
-  }
+      localStorage.setItem("Authorization", "yyy");
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
